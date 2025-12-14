@@ -47,5 +47,6 @@ sysinfo.txt
 *.log
 *.lib
 *.sbr
+*.sln
 *.ini
 AssemblyInfo.cs
