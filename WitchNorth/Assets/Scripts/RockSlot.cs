@@ -6,6 +6,8 @@ public class RockSlot : MonoBehaviour, ISnappable
     private DraggableWeight snappedWeight;
     public void OnSnap(DraggableWeight draggable)
     {
+        if (snappedWeight != null) return;
+
         snappedWeight = draggable;
         draggable.transform.position = transform.position;
         WinManager.self.AddWeight(side, snappedWeight.weight);
@@ -13,12 +15,14 @@ public class RockSlot : MonoBehaviour, ISnappable
         FireSpawner.self.SpawnFires(side, WinManager.self.GetNumFiresLit(side));
             
         if (!WinManager.self.CheckForWin()) return;
-        //win stuff
+        WinManager.self.TriggerWin();
     }
 
-    public void OnUnsnap()
+    public void OnUnsnap(DraggableWeight draggable)
     {
         WinManager.self.AddWeight(side, snappedWeight.weight * -1);
         snappedWeight = null;
+
+        FireSpawner.self.SpawnFires(side, WinManager.self.GetNumFiresLit(side));
     }
 }

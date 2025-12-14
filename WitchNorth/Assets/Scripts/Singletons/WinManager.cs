@@ -7,6 +7,7 @@ public class WinManager : MonoBehaviour
     [SerializeField] private int numSides = 3;
     [SerializeField] private int correctTotal = 20;
     private int[] totals;
+    private bool onLevel1 = true;
 
 
     void Awake()
@@ -46,5 +47,20 @@ public class WinManager : MonoBehaviour
             if (i != correctTotal) return false;
         }
         return true;
+    }
+
+    public void TriggerWin()
+    {
+        if (onLevel1)
+        {
+            NarrativeManager.self.Narrative1();
+            numSides = 4;
+            totals = new int[numSides];
+            correctTotal = 26;
+            onLevel1 = false;
+        } else
+        {
+            NarrativeManager.self.Narrative2();
+        }
     }
 }

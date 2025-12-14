@@ -4,6 +4,7 @@ using UnityEngine;
 public class DraggableWeight : Interactable, ILeftClick, ILeftRelease
 {
     private bool isDragging;
+    private ISnappable snappedIn;
     [SerializeField] private float radius;
     [SerializeField] public int weight;
     
@@ -14,6 +15,12 @@ public class DraggableWeight : Interactable, ILeftClick, ILeftRelease
 
     public void DoLeftClick()
     {
+        if (snappedIn != null)
+        {
+            snappedIn.OnUnsnap(this);
+            snappedIn = null;
+        }
+
         isDragging = true;
         StartCoroutine(DoDrag());
     }
@@ -25,6 +32,7 @@ public class DraggableWeight : Interactable, ILeftClick, ILeftRelease
         ISnappable snappableFound = FindSnappable();
         if (snappableFound != null)
         {
+            snappedIn = snappableFound;
             snappableFound.OnSnap(this);
         }
     }
