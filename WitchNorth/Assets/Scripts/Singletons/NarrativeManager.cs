@@ -58,12 +58,15 @@ public class NarrativeManager : Interactable, ILeftClick
                 text.text = "The bad news is I only halfway know how to use them.";
                 break;
             case 4:
-                text.text = "They only came with a scale and a scrap of paper, no instructions.";
+                text.text = "Each one is a different weight, and they only came with a scale and a scrap of paper.";
                 break;
             case 5:
-                text.text = "If I can figure this out, maybe I can get out of here.";
+                text.text = "The only thing the witch told me was not to put all the heavy ones together or it might catch me on fire!";
                 break;
             case 6:
+                text.text = "If I can figure this out, maybe I can get out of here.";
+                break;
+            case 7:
                 textPanel.SetActive(false);
                 GetComponent<Collider>().enabled = false;
                 narrativeState++;
